@@ -74,14 +74,10 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v)
             {
-                Intent intent;
-                intent = new Intent(getContext(), AuthActivity.class);
                 PreferencesHelper.setUserName(getContext(),"");
                 PreferencesHelper.setHasLogin(getContext(), false);
 
                 new DeleteInstanceId().execute();
-                getActivity().finish();
-                startActivity(intent);
             }
         });
 
@@ -145,6 +141,15 @@ public class ProfileFragment extends Fragment {
                 e.printStackTrace();
             }
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Intent intent;
+            intent = new Intent(getContext(), AuthActivity.class);
+            getActivity().finish();
+            startActivity(intent);
         }
     }
 }
